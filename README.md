@@ -1,1 +1,1 @@
-Internship 2025 sample codes
+Internship sample codes
