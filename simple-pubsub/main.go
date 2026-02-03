@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -55,7 +56,8 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	ch := make(chan string)
 	ps.Subscribe(topic, ch)
-	log.Printf("Subscribed to topic: %v, waiting for messages...", topic)
+	w.Write([]byte(fmt.Sprintf("Subscribed to topic: %v, waiting for messages...", topic)))
+	w.(http.Flusher).Flush()
 
 	for msg := range ch {
 		_, err := w.Write([]byte(msg + "\n"))
