@@ -40,7 +40,6 @@ func publishHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	ps.Publish(c.Topic, c.Message)
 	w.Write([]byte("Message published successfully\n"))
-	w.WriteHeader(http.StatusOK)
 }
 
 func subscribeHandler(w http.ResponseWriter, r *http.Request) {
