@@ -56,7 +56,11 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	ch := make(chan string)
 	ps.Subscribe(topic, ch)
-	w.Write([]byte(fmt.Sprintf("Subscribed to topic: %v, waiting for messages...", topic)))
+	_, err := w.Write([]byte(fmt.Sprintf("Subscribed to topic: %v, waiting for messages...", topic)))
+	if err != nil {
+		log.Println(err)
+		return
+	}
 	w.(http.Flusher).Flush()
 
 	for msg := range ch {
