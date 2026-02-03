@@ -48,7 +48,7 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check the topi from query parameters
+	// Check the topic from query parameters
 	topic := r.URL.Query().Get("topic")
 	if topic == "" {
 		http.Error(w, "Topic is required", http.StatusBadRequest)
