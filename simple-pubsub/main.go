@@ -66,7 +66,6 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 				if c == ch {
 					ps.topics[topic] = append(subscribers[:i], subscribers[i+1:]...)
 					close(c)
-
 				}
 			}
 		}
@@ -82,7 +81,7 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 				if !ok {
 					return
 				}
-				_, err := w.Write([]byte(msg + "\n"))
+				_, err := w.Write([]byte("\n" + msg + "\n"))
 				if err != nil {
 					return
 				}
@@ -92,15 +91,15 @@ func subscribeHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}()
-
-	// Subscribe to the topic, adds the channel to the list of subscribers
-	ps.Subscribe(topic, ch)
 	_, err := w.Write([]byte(fmt.Sprintf("Subscribed to topic: %v, waiting for messages...", topic)))
 	if err != nil {
 		log.Println(err)
 		return
 	}
 	w.(http.Flusher).Flush()
+	// Subscribe to the topic, adds the channel to the list of subscribers
+	ps.Subscribe(topic, ch)
+
 	<-wait
 }
 
