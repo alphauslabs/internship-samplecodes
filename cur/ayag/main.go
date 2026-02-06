@@ -62,5 +62,6 @@ func main() {
 	}
 
 	fmt.Printf("Total: %f\n", totals)
+	fmt.Printf("Rows processed: %d\n", len(rows))
 	fmt.Printf("Duration: %s\n", time.Since(startTime))
 }
