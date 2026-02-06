@@ -1,6 +1,6 @@
 module github.com/alphauslabs/internship-samplecodes
 
-go 1.25
+go 1.22
 
 require (
 	cloud.google.com/go/spanner v1.87.0
